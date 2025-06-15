@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2nd Page</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff3e0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease-in;
+        }
+
+        h2 {
+            color: #ff6f00;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            color: #ff6f00;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"],
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        button {
+            background-color: #ff6f00;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e65100;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form id="regForm">
+            <label for="a">Full Name</label>
+            <input type="text" id="a" name="FullName" placeholder="Enter name" required>
+
+            <label for="b">Email</label>
+            <input type="email" id="b" name="Email" placeholder="Enter email" required>
+
+            <label>Date of Birth</label>
+            <input type="date" name="dob" required>
+
+            <label>Gender</label>
+            <input type="radio" id="male" name="gen" value="Male"> Male
+            <input type="radio" id="female" name="gen" value="Female"> Female
+            <input type="radio" id="other" name="gen" value="Other"> Other
+
+            <label>Preferred Location</label>
+            <input type="checkbox" name="loc" value="Online"> Online
+            <input type="checkbox" name="loc" value="Vizag"> Vizag
+            <input type="checkbox" name="loc" value="Goa"> Goa
+
+            <label>Course</label>
+            <input type="radio" id="WebDevelopment" name="course" value="Web Development"> Web Development
+            <input type="radio" id="Python" name="course" value="Python"> Python
+            <input type="radio" id="AI" name="course" value="AI"> AI
+            <input type="radio" id="Java" name="course" value="Java"> Java
+
+            <label for="d">Current Location</label>
+            <textarea id="d" name="currentLocation" placeholder="Type your current location..." required></textarea>
+
+            <label for="e">Aadhar Card</label>
+            <input type="file" id="e" name="aadhar" required>
+
+            <label for="np">New Password</label>
+            <input type="password" id="np" name="newPassword" placeholder="Enter password" required>
+
+            <label for="cp">Confirm Password</label>
+            <input type="password" id="cp" name="confirmPassword" placeholder="Confirm password" required>
+
+            <label>
+                <input type="checkbox" id="terms" required> I agree to the <a href="#" style="color: #ff6f00;">Terms and Conditions</a>
+            </label>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("regForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById("a").value;
+            const email = document.getElementById("b").value;
+            const dob = document.querySelector('input[name="dob"]').value;
+            const gender = document.querySelector('input[name="gen"]:checked')?.value;
+            const termsAccepted = document.getElementById("terms").checked;
+            const password = document.getElementById("np").value;
+            const confirmPassword = document.getElementById("cp").value;
+
+            if (!gender) {
+                alert("Please select a gender.");
+                return;
+            }
+
+            if (!termsAccepted) {
+                alert("You must accept the terms and conditions.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            alert(`Thank you, ${name}!\nYour email: ${email}\nDOB: ${dob}\nGender: ${gender}\nYou have successfully registered.\nCheck your mail after 24hrs`);
+
+            history.back();
+        });
+    </script>
+
+</body>
+</html>
